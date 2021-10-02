@@ -56,7 +56,10 @@ select student.id,student.name,student.dept_name,student.tot_cred from takes,cou
 select distinct instructor.name,instructor.id, student.name,student.id,takes.grade from takes,instructor,teaches,student,advisor
     where takes.grade not in ('A','A-','B','B+') and advisor.i_id=instructor.id and takes.id=advisor.s_id and advisor.s_id=student.id;
 -- c
-
+(select student.dept_name from student,takes
+    where student.id=takes.id and takes.grade not in ('C','C+','C-','F')) except
+(select student.dept_name from student,takes
+    where student.id=takes.id and takes.grade in ('C','C+','C-','F'));
 -- d
 select * from teaches;
 (select instructor.id,instructor.name from teaches,takes,instructor
@@ -64,7 +67,8 @@ select * from teaches;
 (select instructor.id,instructor.name from teaches,takes,instructor
     where teaches.course_id=takes.course_id and takes.grade in ('A','A-') and instructor.id=teaches.id);
 -- e
-
+select course.course_id,course.title,time_slot.day,time_slot.end_hr,time_slot.end_min from section,time_slot,course
+    where time_slot.time_slot_id=section.time_slot_id and time_slot.end_hr<13 and course.course_id=section.course_id;
 
 
 
