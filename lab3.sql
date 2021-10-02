@@ -61,7 +61,6 @@ select distinct instructor.name,instructor.id, student.name,student.id,takes.gra
 (select student.dept_name from student,takes
     where student.id=takes.id and takes.grade in ('C','C+','C-','F'));
 -- d
-select * from teaches;
 (select instructor.id,instructor.name from teaches,takes,instructor
     where teaches.course_id=takes.course_id and takes.grade not in ('A','A-') and instructor.id=teaches.id) except
 (select instructor.id,instructor.name from teaches,takes,instructor
